@@ -21,6 +21,7 @@
     <link rel="canonical" href="https://tnibir.github.io/">
     <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml" sizes="any">
     <link rel="preload" href="assets/tasbiul-islam-nibir.jpg" as="image" fetchpriority="high">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <title>Tasbiul Islam Nibir | MEAL, Data &amp; Research</title>
     <script type="application/ld+json">
@@ -52,6 +53,7 @@
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <div class="galaxy-background" id="galaxy-background" aria-hidden="true"><canvas id="galaxy-canvas"></canvas></div>
     <div class="ambient ambient-one" aria-hidden="true"></div>
     <div class="ambient ambient-two" aria-hidden="true"></div>
 
@@ -448,7 +450,7 @@
       <div class="shell footer-grid">
         <div><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><img src="assets/favicon.svg?v=2" alt=""></span><span class="brand-copy"><strong>Tasbiul Islam Nibir</strong><small>Evidence to action</small></span></a><p>MEAL · MERL · Data · MIS · Research</p></div>
         <div class="footer-links"><a href="https://www.linkedin.com/in/tasbiul/" target="_blank" rel="noopener">LinkedIn <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a><a href="https://github.com/tnibir" target="_blank" rel="noopener">GitHub <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a><a href="https://www.coursera.org/user/d307eb6f2216550d3c848b03baeebdf1" target="_blank" rel="noopener">Coursera <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a><a href="https://tasbiul.shinyapps.io/Tasbiul_Islam_Nibir_CV/" target="_blank" rel="noopener">R Shiny CV <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a><a href="https://sites.google.com/view/tasbiul-islam-nibir/home?read_current=1" target="_blank" rel="noopener">Previous portfolio <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a></div>
-        <div class="footer-note"><p>Dhaka, Bangladesh</p><p>© <span id="current-year">2026</span> Tasbiul Islam Nibir</p><a href="#top">Back to top <span class="icon-arrow icon-arrow-up" aria-hidden="true"></span></a></div>
+        <div class="footer-note"><p>Dhaka, Bangladesh</p><p>© <span id="current-year">2026</span> Tasbiul Islam Nibir</p><p class="model-credit">Galaxy “<a href="https://sketchfab.com/3d-models/need-some-space-d6521362b37b48e3a82bce4911409303" target="_blank" rel="noopener">Need some space?</a>” by Loïc Norgeot · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p><a href="#top">Back to top <span class="icon-arrow icon-arrow-up" aria-hidden="true"></span></a></div>
       </div>
     </footer>
 
@@ -534,6 +536,15 @@
     </dialog>
 
     <noscript><div class="noscript">This site works without JavaScript; interactive filters and motion enhancements are unavailable.</div></noscript>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+        }
+      }
+    </script>
     <script src="script.js" defer></script>
+    <script type="module" src="galaxy.js"></script>
   </body>
 </html>
