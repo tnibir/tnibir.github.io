@@ -7,6 +7,52 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const constrainedDevice = navigator.connection?.saveData ||
   (navigator.deviceMemory && navigator.deviceMemory < 2);
 
+function applyGalaxyPalette(points) {
+  const position = points.geometry.getAttribute("position");
+  if (!position) return;
+
+  points.geometry.computeBoundingBox();
+  const bounds = points.geometry.boundingBox;
+  const center = bounds.getCenter(new THREE.Vector3());
+  const size = bounds.getSize(new THREE.Vector3());
+  const sourceColor = points.geometry.getAttribute("color");
+  const colors = new Float32Array(position.count * 3);
+  const cool = new THREE.Color("#3aa1aa");
+  const cyan = new THREE.Color("#8dd8df");
+  const gold = new THREE.Color("#e29000");
+  const warm = new THREE.Color("#fadb67");
+
+  for (let index = 0; index < position.count; index += 1) {
+    const nx = (position.getX(index) - center.x) / Math.max(size.x, .001);
+    const ny = (position.getY(index) - center.y) / Math.max(size.y, .001);
+    const nz = (position.getZ(index) - center.z) / Math.max(size.z, .001);
+    const radius = Math.sqrt(nx * nx + ny * ny + nz * nz) * 1.8;
+    const angle = Math.atan2(ny, nx);
+    const swirl = .5 + .5 * Math.sin(angle * 3.4 - radius * 11 + nz * 5);
+    const coreGlow = Math.exp(-radius * 3.2);
+    const warmth = Math.min(1, swirl * .62 + coreGlow * .58);
+    const variation = .5 + .5 * Math.sin(index * .754877 + angle * 2.2);
+
+    const coolR = cool.r + (cyan.r - cool.r) * (.2 + variation * .55);
+    const coolG = cool.g + (cyan.g - cool.g) * (.2 + variation * .55);
+    const coolB = cool.b + (cyan.b - cool.b) * (.2 + variation * .55);
+    const warmR = gold.r + (warm.r - gold.r) * (.28 + coreGlow * .72);
+    const warmG = gold.g + (warm.g - gold.g) * (.28 + coreGlow * .72);
+    const warmB = gold.b + (warm.b - gold.b) * (.28 + coreGlow * .72);
+    const sourceLuminance = sourceColor
+      ? (sourceColor.getX(index) + sourceColor.getY(index) + sourceColor.getZ(index)) / 3
+      : 1;
+    const intensity = .76 + sourceLuminance * .24;
+    const offset = index * 3;
+
+    colors[offset] = (coolR + (warmR - coolR) * warmth) * intensity;
+    colors[offset + 1] = (coolG + (warmG - coolG) * warmth) * intensity;
+    colors[offset + 2] = (coolB + (warmB - coolB) * warmth) * intensity;
+  }
+
+  points.geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+}
+
 if (container && canvas && !constrainedDevice) {
   try {
     const renderer = new THREE.WebGLRenderer({
@@ -134,6 +180,7 @@ if (container && canvas && !constrainedDevice) {
       model.position.sub(center);
       model.traverse(object => {
         if (!object.isPoints) return;
+        applyGalaxyPalette(object);
         object.material = object.material.clone();
         object.material.size = .043;
         object.material.sizeAttenuation = true;
@@ -141,6 +188,8 @@ if (container && canvas && !constrainedDevice) {
         object.material.opacity = .94;
         object.material.map = starSprite;
         object.material.alphaTest = .015;
+        object.material.color.set(0xffffff);
+        object.material.vertexColors = true;
         object.material.depthWrite = false;
       });
 
