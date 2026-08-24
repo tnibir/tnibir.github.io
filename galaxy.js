@@ -55,16 +55,16 @@ if (container && canvas && !constrainedDevice) {
       const progress = reduceMotion.matches ? 0 : currentProgress;
 
       galaxy.rotation.set(
-        -.2 + progress * .72,
-        .28 + progress * 1.55,
-        -.28 + progress * 1.08
+        -.28 + progress * .82,
+        .12 + progress * 1.7,
+        -.42 + progress * 1.2
       );
       galaxy.position.set(
-        (mobile ? .15 : 1.45) - progress * (mobile ? .3 : .82),
-        (mobile ? .2 : .35) - progress * .72,
+        (mobile ? 0 : .82) - progress * (mobile ? .32 : .9),
+        (mobile ? .16 : .08) - progress * .78,
         0
       );
-      const zoom = (mobile ? .82 : 1.08) + progress * (mobile ? .18 : .32);
+      const zoom = (mobile ? .82 : 1.02) + progress * (mobile ? .26 : .42);
       galaxy.scale.setScalar(zoom);
     }
 
@@ -123,15 +123,15 @@ if (container && canvas && !constrainedDevice) {
       model.traverse(object => {
         if (!object.isPoints) return;
         object.material = object.material.clone();
-        object.material.size = .022;
+        object.material.size = .027;
         object.material.sizeAttenuation = true;
         object.material.transparent = true;
-        object.material.opacity = .82;
+        object.material.opacity = .9;
         object.material.depthWrite = false;
       });
 
       const normalized = new THREE.Group();
-      normalized.scale.setScalar(3.7 / longestSide);
+      normalized.scale.setScalar(4.8 / longestSide);
       normalized.add(model);
       galaxy = new THREE.Group();
       galaxy.add(normalized);
