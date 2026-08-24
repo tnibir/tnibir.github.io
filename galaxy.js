@@ -118,15 +118,29 @@ if (container && canvas && !constrainedDevice) {
       const center = bounds.getCenter(new THREE.Vector3());
       const size = bounds.getSize(new THREE.Vector3());
       const longestSide = Math.max(size.x, size.y, size.z) || 1;
+      const spriteCanvas = document.createElement("canvas");
+      spriteCanvas.width = 64;
+      spriteCanvas.height = 64;
+      const spriteContext = spriteCanvas.getContext("2d");
+      const spriteGradient = spriteContext.createRadialGradient(32, 32, 1, 32, 32, 31);
+      spriteGradient.addColorStop(0, "rgba(255,255,255,1)");
+      spriteGradient.addColorStop(.28, "rgba(255,255,255,.92)");
+      spriteGradient.addColorStop(.7, "rgba(255,255,255,.22)");
+      spriteGradient.addColorStop(1, "rgba(255,255,255,0)");
+      spriteContext.fillStyle = spriteGradient;
+      spriteContext.fillRect(0, 0, 64, 64);
+      const starSprite = new THREE.CanvasTexture(spriteCanvas);
 
       model.position.sub(center);
       model.traverse(object => {
         if (!object.isPoints) return;
         object.material = object.material.clone();
-        object.material.size = .027;
+        object.material.size = .043;
         object.material.sizeAttenuation = true;
         object.material.transparent = true;
-        object.material.opacity = .9;
+        object.material.opacity = .94;
+        object.material.map = starSprite;
+        object.material.alphaTest = .015;
         object.material.depthWrite = false;
       });
 
