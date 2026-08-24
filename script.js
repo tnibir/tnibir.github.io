@@ -14,23 +14,58 @@
     }
   };
 
-  // Theme preference
+  // Coordinated page and 3D color palettes
   const themeButton = document.querySelector("#theme-toggle");
+  const themeMenu = document.querySelector("#theme-menu");
+  const themeOptions = [...document.querySelectorAll("[data-theme-option]")];
   const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const preferredTheme = storage.get("tnibir-theme") ||
+  const validThemes = ["dark", "light", "plum", "forest", "cobalt", "charcoal"];
+  const themeNames = {
+    dark: "Ocean night",
+    light: "Ivory day",
+    plum: "Plum dusk",
+    forest: "Forest copper",
+    cobalt: "Cobalt coral",
+    charcoal: "Charcoal lime"
+  };
+  const savedTheme = storage.get("tnibir-theme");
+  const preferredTheme = (validThemes.includes(savedTheme) && savedTheme) ||
     (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
 
   function applyTheme(theme) {
-    root.dataset.theme = theme;
-    themeButton?.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} theme`);
-    if (themeMeta) themeMeta.content = theme === "dark" ? "#071412" : "#edf1e8";
+    const selectedTheme = validThemes.includes(theme) ? theme : "dark";
+    root.dataset.theme = selectedTheme;
+    themeButton?.setAttribute("aria-label", `Choose color theme. Current: ${themeNames[selectedTheme]}`);
+    themeOptions.forEach(option => option.setAttribute("aria-checked", String(option.dataset.themeOption === selectedTheme)));
+    if (themeMeta) themeMeta.content = getComputedStyle(root).getPropertyValue("--ink").trim();
+    window.dispatchEvent(new CustomEvent("portfolio-theme-change", { detail: { theme: selectedTheme } }));
   }
 
   applyTheme(preferredTheme);
+  function closeThemeMenu(returnFocus = false) {
+    if (!themeMenu || !themeButton) return;
+    themeMenu.hidden = true;
+    themeButton.setAttribute("aria-expanded", "false");
+    if (returnFocus) themeButton.focus();
+  }
   themeButton?.addEventListener("click", () => {
-    const next = root.dataset.theme === "dark" ? "light" : "dark";
-    applyTheme(next);
-    storage.set("tnibir-theme", next);
+    if (!themeMenu) return;
+    const opening = themeMenu.hidden;
+    themeMenu.hidden = !opening;
+    themeButton.setAttribute("aria-expanded", String(opening));
+    if (opening) themeOptions.find(option => option.getAttribute("aria-checked") === "true")?.focus();
+  });
+  themeOptions.forEach(option => option.addEventListener("click", () => {
+    const selectedTheme = option.dataset.themeOption;
+    applyTheme(selectedTheme);
+    storage.set("tnibir-theme", selectedTheme);
+    closeThemeMenu(true);
+  }));
+  document.addEventListener("click", event => {
+    if (!event.target.closest(".theme-picker")) closeThemeMenu();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && themeMenu && !themeMenu.hidden) closeThemeMenu(true);
   });
 
   // Motion preference and a visible pause control

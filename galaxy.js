@@ -16,11 +16,21 @@ function applyGalaxyPalette(points) {
   const center = bounds.getCenter(new THREE.Vector3());
   const size = bounds.getSize(new THREE.Vector3());
   const sourceColor = points.geometry.getAttribute("color");
+  if (!points.userData.sourceLuminance) {
+    points.userData.sourceLuminance = new Float32Array(position.count);
+    for (let index = 0; index < position.count; index += 1) {
+      points.userData.sourceLuminance[index] = sourceColor
+        ? (sourceColor.getX(index) + sourceColor.getY(index) + sourceColor.getZ(index)) / 3
+        : 1;
+    }
+  }
   const colors = new Float32Array(position.count * 3);
-  const cool = new THREE.Color("#3aa1aa");
-  const cyan = new THREE.Color("#8dd8df");
-  const gold = new THREE.Color("#e29000");
-  const warm = new THREE.Color("#fadb67");
+  const pageStyles = getComputedStyle(document.documentElement);
+  const paletteColor = (property, fallback) => pageStyles.getPropertyValue(property).trim() || fallback;
+  const cool = new THREE.Color(paletteColor("--galaxy-cool", "#3aa1aa"));
+  const cyan = new THREE.Color(paletteColor("--galaxy-cool-soft", "#8dd8df"));
+  const gold = new THREE.Color(paletteColor("--galaxy-warm", "#e29000"));
+  const warm = new THREE.Color(paletteColor("--galaxy-warm-soft", "#fadb67"));
 
   for (let index = 0; index < position.count; index += 1) {
     const nx = (position.getX(index) - center.x) / Math.max(size.x, .001);
@@ -39,9 +49,7 @@ function applyGalaxyPalette(points) {
     const warmR = gold.r + (warm.r - gold.r) * (.28 + coreGlow * .72);
     const warmG = gold.g + (warm.g - gold.g) * (.28 + coreGlow * .72);
     const warmB = gold.b + (warm.b - gold.b) * (.28 + coreGlow * .72);
-    const sourceLuminance = sourceColor
-      ? (sourceColor.getX(index) + sourceColor.getY(index) + sourceColor.getZ(index)) / 3
-      : 1;
+    const sourceLuminance = points.userData.sourceLuminance[index];
     const intensity = .76 + sourceLuminance * .24;
     const offset = index * 3;
 
@@ -148,6 +156,11 @@ if (container && canvas && !constrainedDevice) {
     new MutationObserver(() => startRendering()).observe(document.body, {
       attributes: true,
       attributeFilter: ["class"]
+    });
+    window.addEventListener("portfolio-theme-change", () => {
+      if (!galaxy) return;
+      galaxy.traverse(object => { if (object.isPoints) applyGalaxyPalette(object); });
+      startRendering();
     });
     reduceMotion.addEventListener?.("change", startRendering);
     canvas.addEventListener("webglcontextlost", event => {

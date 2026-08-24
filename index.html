@@ -53,6 +53,7 @@
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
     <div class="galaxy-background" id="galaxy-background" aria-hidden="true"><canvas id="galaxy-canvas"></canvas></div>
+    <div class="contrast-veil" aria-hidden="true"></div>
     <div class="ambient ambient-one" aria-hidden="true"></div>
     <div class="ambient ambient-two" aria-hidden="true"></div>
 
@@ -68,7 +69,7 @@
         </button>
         <div class="nav-links" id="nav-links">
           <a href="#expertise">Expertise</a>
-          <a href="#work">Selected work</a>
+          <a href="#work">My Projects</a>
           <a href="#experience">Experience</a>
           <a href="#credentials">Credentials</a>
           <a class="nav-contact" href="#contact">Let’s talk</a>
@@ -78,9 +79,20 @@
             <span class="sr-only">Pause decorative motion</span>
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>
           </button>
-          <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
-            <svg class="theme-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
-          </button>
+          <div class="theme-picker">
+            <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Choose color theme" aria-expanded="false" aria-controls="theme-menu" title="Color theme">
+              <span class="theme-preview" aria-hidden="true"><i></i><i></i><i></i></span>
+            </button>
+            <div class="theme-menu" id="theme-menu" role="menu" aria-label="Color themes" hidden>
+              <p>Color theme</p>
+              <button type="button" role="menuitemradio" data-theme-option="dark" aria-checked="true"><span class="theme-swatch swatch-ocean" aria-hidden="true"></span><span>Ocean night</span><i aria-hidden="true"></i></button>
+              <button type="button" role="menuitemradio" data-theme-option="light" aria-checked="false"><span class="theme-swatch swatch-ivory" aria-hidden="true"></span><span>Ivory day</span><i aria-hidden="true"></i></button>
+              <button type="button" role="menuitemradio" data-theme-option="plum" aria-checked="false"><span class="theme-swatch swatch-plum" aria-hidden="true"></span><span>Plum dusk</span><i aria-hidden="true"></i></button>
+              <button type="button" role="menuitemradio" data-theme-option="forest" aria-checked="false"><span class="theme-swatch swatch-forest" aria-hidden="true"></span><span>Forest copper</span><i aria-hidden="true"></i></button>
+              <button type="button" role="menuitemradio" data-theme-option="cobalt" aria-checked="false"><span class="theme-swatch swatch-cobalt" aria-hidden="true"></span><span>Cobalt coral</span><i aria-hidden="true"></i></button>
+              <button type="button" role="menuitemradio" data-theme-option="charcoal" aria-checked="false"><span class="theme-swatch swatch-charcoal" aria-hidden="true"></span><span>Charcoal lime</span><i aria-hidden="true"></i></button>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
@@ -184,14 +196,14 @@
       <section class="section work-section" id="work" aria-labelledby="work-title">
         <div class="shell">
           <div class="section-heading light reveal">
-            <p class="eyebrow"><span></span>Selected work</p>
+            <p class="eyebrow"><span></span>Portfolio</p>
             <div>
-              <h2 id="work-title">Evidence made<br>useful.</h2>
+              <h2 id="work-title">My Projects</h2>
               <p>Public builds and representative systems that show how I approach real operational and analytical problems.</p>
             </div>
           </div>
 
-          <div class="project-filters reveal" role="group" aria-label="Filter selected work">
+          <div class="project-filters reveal" role="group" aria-label="Filter projects">
             <button type="button" class="filter is-active" data-filter="all" aria-pressed="true">All work</button>
             <button type="button" class="filter" data-filter="product" aria-pressed="false">Digital products</button>
             <button type="button" class="filter" data-filter="data" aria-pressed="false">Data &amp; visualization</button>
@@ -361,7 +373,7 @@
         </div>
       </section>
 
-      <section class="section shell" id="experience" aria-labelledby="experience-title">
+      <section class="section shell experience-section" id="experience" aria-labelledby="experience-title">
         <div class="section-heading reveal">
           <p class="eyebrow"><span></span>Experience</p>
           <div><h2 id="experience-title">Built in the field.<br>Strengthened by research.</h2><p>My perspective comes from working where policy, programme delivery, community accountability and technical systems meet.</p></div>
