@@ -2,3 +2,7 @@
 Resume_File_1.pdf
 
 .DS_Store
+
+node_modules/
+playwright-report/
+test-results/

@@ -5,6 +5,12 @@
   const body = document.body;
   root.classList.add("js");
 
+  // ES modules and GLB fetches are blocked when index.html is opened as file://.
+  // Keep a lightweight animated galaxy visible for direct-file previews.
+  if (window.location.protocol === "file:") {
+    document.querySelector("#galaxy-background")?.classList.add("load-failed");
+  }
+
   const storage = {
     get(key) {
       try { return localStorage.getItem(key); } catch { return null; }

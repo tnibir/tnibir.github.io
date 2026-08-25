@@ -230,6 +230,30 @@
               </div>
             </article>
 
+            <article class="project-card project-featured reveal" data-category="product meal data research">
+              <div class="project-art ssu-art" aria-hidden="true">
+                <div class="ssu-scenario">
+                  <span>Five-year scenario</span>
+                  <strong>2026—2030</strong>
+                  <div class="ssu-bars"><i style="--h:32%"></i><i style="--h:47%"></i><i style="--h:59%"></i><i style="--h:76%"></i><i style="--h:91%"></i></div>
+                  <small>Projected fund balance</small>
+                </div>
+                <div class="ssu-schemes"><span>EIS</span><span>MAT</span><span>UI</span><span>OLD</span></div>
+                <svg viewBox="0 0 620 360"><path d="M28 297C128 287 154 246 230 251s96-72 174-56 103-93 188-119"/><path class="ssu-dash" d="M28 318C145 302 154 278 230 284s99-48 174-38 105-57 188-50"/></svg>
+              </div>
+              <div class="project-body">
+                <div class="project-kicker"><span>Independent contribution · Live</span><small>Social protection / Policy modelling</small></div>
+                <h3>Bangladesh Social Insurance<br>Policy Projection Tool</h3>
+                <p>A browser-based knowledge and policy hub I developed as part of my work with Bangladesh’s Social Security Unit. It brings verified policy context together with editable, simplified projections for employment injury, maternity, unemployment and old-age social insurance.</p>
+                <ul class="tag-list"><li>Scenario modelling</li><li>Policy research</li><li>Projection logic</li><li>D3.js</li></ul>
+                <div class="project-links">
+                  <a href="https://tnibir.github.io/SSU-Bangladesh/" target="_blank" rel="noopener">Launch projection tool <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a>
+                  <a href="https://github.com/tnibir/SSU-Bangladesh" target="_blank" rel="noopener">View source</a>
+                  <button class="text-button open-case" type="button" data-dialog="ssu-dialog">Read case note <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </article>
+
             <article class="project-card project-featured reveal" data-category="data research">
               <div class="project-art map-art" aria-hidden="true">
                 <svg viewBox="0 0 620 360"><path class="map-road" d="M-10 283C95 226 133 268 226 180s169-13 243-89 106-44 172-75"/><path class="map-road secondary" d="M23 80c102 26 146 96 220 98s87 98 185 103 125-78 209-49"/><g class="risk risk-a"><circle r="56"/><circle r="7"/></g><g class="risk risk-b"><circle r="39"/><circle r="7"/></g><g class="risk risk-c"><circle r="73"/><circle r="7"/></g></svg>
@@ -299,6 +323,25 @@
                 <div class="project-links">
                   <a href="https://github.com/tnibir/D3-Local-Chart-Templates" target="_blank" rel="noopener">Explore library <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a>
                   <button class="text-button open-case" type="button" data-dialog="d3-dialog">Read case note <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-delay="2" data-category="meal research">
+              <div class="project-art guideline-art" aria-hidden="true">
+                <div class="guideline-book guideline-back"><span>STANDARDS</span><i></i><i></i><i></i></div>
+                <div class="guideline-book guideline-mid"><span>WORKED<br>EXAMPLES</span><i></i><i></i><i></i></div>
+                <div class="guideline-book guideline-front"><small>MONITORING &amp;</small><strong>MEAL</strong><span>GUIDELINE LIBRARY</span></div>
+                <div class="guideline-tabs"><i>G</i><i>R</i><i>M</i><i>E</i><i>A</i><i>L</i></div>
+              </div>
+              <div class="project-body">
+                <div class="project-kicker"><span>Living knowledge library</span><small>Senior MEAL practice</small></div>
+                <h3>Monitoring &amp; MEAL Guideline Library</h3>
+                <p>An evolving professional library I maintain across MEAL governance, results frameworks, monitoring, evaluation, accountability, learning and senior-practice preparation.</p>
+                <ul class="tag-list"><li>MEAL governance</li><li>Standards</li><li>Worked examples</li><li>Learning resources</li></ul>
+                <div class="project-links">
+                  <a href="https://github.com/tnibir/Monitoring-Guideline" target="_blank" rel="noopener">Explore library <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></a>
+                  <button class="text-button open-case" type="button" data-dialog="monitoring-dialog">Read case note <span class="icon-arrow icon-arrow-ne" aria-hidden="true"></span></button>
                 </div>
               </div>
             </article>
@@ -481,6 +524,24 @@
       <div class="case-flow" role="group" aria-label="Risk-zone mapping flow"><span>Accident points</span><i aria-hidden="true"></i><span>Buffers</span><i aria-hidden="true"></i><span>Risk zones</span><i aria-hidden="true"></i><span>Route scores</span></div>
       <div class="case-columns"><div><h3>The need</h3><p>Point locations alone make it difficult to see where incidents concentrate or how a planned route intersects higher-risk areas.</p></div><div><h3>The approach</h3><p>I built a browser-based map that groups overlapping accident buffers, scores route sections and exposes radius, layer and endpoint controls.</p></div><div><h3>The value</h3><p>The interface turns spatial records into an accessible tool for exploring clusters, comparing routes and discussing where attention may be needed.</p></div></div>
       <p class="dialog-note">Public demonstration using browser-based geospatial analysis; risk scores support exploration and do not replace formal safety assessment.</p>
+    </dialog>
+
+    <dialog class="case-dialog" id="ssu-dialog" aria-labelledby="ssu-title">
+      <button class="dialog-close" type="button" aria-label="Close case note"><span class="close-icon" aria-hidden="true"></span></button>
+      <p class="eyebrow"><span></span>Case note · Social-insurance policy modelling</p>
+      <h2 id="ssu-title">Testing social-insurance policy scenarios before deeper actuarial work.</h2>
+      <div class="case-flow" role="group" aria-label="Social-insurance projection workflow"><span>Policy evidence</span><i aria-hidden="true"></i><span>Edit assumptions</span><i aria-hidden="true"></i><span>Project costs</span><i aria-hidden="true"></i><span>Discuss options</span></div>
+      <div class="case-columns"><div><h3>The need</h3><p>Policy development needs a transparent way to explore how coverage, wages, claims, benefits, contributions and time horizons affect possible social-insurance schemes.</p></div><div><h3>The approach</h3><p>As part of my contribution to Bangladesh’s Social Security Unit, I developed a public knowledge hub with editable models for employment injury, maternity, unemployment and old-age insurance, plus a D3 lifecycle view.</p></div><div><h3>The value</h3><p>Teams can test assumptions, compare policy branches and see multi-year cost and reserve implications before commissioning deeper modelling or settling design parameters.</p></div></div>
+      <p class="dialog-note">Independent technical contribution for policy-development work. Calculator results are simplified scenarios—not official forecasts, approved contribution schedules or a substitute for full actuarial analysis.</p>
+    </dialog>
+
+    <dialog class="case-dialog" id="monitoring-dialog" aria-labelledby="monitoring-title">
+      <button class="dialog-close" type="button" aria-label="Close case note"><span class="close-icon" aria-hidden="true"></span></button>
+      <p class="eyebrow"><span></span>Case note · MEAL knowledge management</p>
+      <h2 id="monitoring-title">Connecting senior MEAL guidance with worked, reusable examples.</h2>
+      <div class="case-flow" role="group" aria-label="Monitoring library learning flow"><span>Core guidance</span><i aria-hidden="true"></i><span>Sample system</span><i aria-hidden="true"></i><span>Standards</span><i aria-hidden="true"></i><span>Apply &amp; adapt</span></div>
+      <div class="case-columns"><div><h3>The need</h3><p>MEAL guidance is often scattered across policies, standards and specialist references, making it hard to see how an organization-wide system fits together.</p></div><div><h3>The approach</h3><p>I organized management guidance, standards, visual study aids and a connected fictional sample set spanning policy, strategy, results, monitoring, evaluation, accountability, learning and data protection.</p></div><div><h3>The value</h3><p>The library creates a structured route for professional learning, interview preparation and adapting stronger MEAL systems to real organizational contexts.</p></div></div>
+      <p class="dialog-note">Living learning collection. Sample HBI materials are illustrative, and third-party references remain the intellectual property of their original publishers.</p>
     </dialog>
 
     <dialog class="case-dialog" id="kusician-dialog" aria-labelledby="kusician-title">
